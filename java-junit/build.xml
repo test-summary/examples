@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<project name="example" default="test">
+    <path id="build.classpath">
+        <fileset dir="lib" includes="*.jar" />
+    </path>
+    <path id="test.classpath">
+        <path refid="build.classpath" />
+        <pathelement path="build" />
+    </path>
+    <target name="test" description="Compile Unit Tests">
+        <mkdir dir="build" />
+        <javac srcdir="." destdir="build" classpathref="build.classpath" />
+        <junit printsummary="true" haltonfailure="no" failureproperty="test.failed">
+            <formatter type="xml" />
+            <classpath refid="test.classpath" />
+            <batchtest todir="results">
+                <fileset dir="build" includes="**/*.class" />
+            </batchtest>
+        </junit>
+        <fail message="Tests FAILED" if="test.failed" />
+    </target>
+</project>

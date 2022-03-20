@@ -1,0 +1,23 @@
+{
+  "name": "example-javascript-tap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example test summary for a JavaScript project with node-tap",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap --output-dir=results test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/test-summary/examples.git"
+  },
+  "keywords": [
+    "test",
+    "summary"
+  ],
+  "author": "Edward Thomson",
+  "license": "MIT",
+  "devDependencies": {
+    "tap": "^16.0.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "example-javascript-mocha",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example test summary for a JavaScript project with mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter mocha-multi-reporters --reporter-options configFile=config.json test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/test-summary/examples.git"
+  },
+  "keywords": [
+    "test",
+    "summary"
+  ],
+  "author": "Edward Thomson",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "jest": "^27.5.1",
+    "mocha": "^9.2.1",
+    "mocha-junit-reporter": "^2.0.2",
+    "mocha-multi-reporters": "^1.5.1"
+  }
+}

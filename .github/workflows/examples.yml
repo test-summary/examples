@@ -1,0 +1,139 @@
+name: Examples
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+
+  # This runs C tests using the Clar test framework
+  c-clar:
+    name: C / Clar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build and test
+        run: |
+          make
+          ./test -rresults/tests.xml
+        working-directory: c-clar
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: c-clar/results/**/*.xml
+          output: c-clar/results/test-summary.md
+        if: always()
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: c-clar
+          path: c-clar/results/test-summary.md
+        if: always()
+
+  # This runs .NET tests using the standard .NET test driver
+  dotnet:
+    name: .NET
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build and test
+        run: |
+          dotnet build
+          dotnet test --logger "junit;LogFilePath=results/tests.xml"
+        working-directory: dotnet
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: dotnet/results/**/*.xml
+          output: dotnet/results/test-summary.md
+        if: always()
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet
+          path: dotnet/results/test-summary.md
+        if: always()
+
+  # This runs Java tests using the JUnit test framework
+  java-junit:
+    name: Java / JUint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build and test
+        run: |
+          ant
+        working-directory: java-junit
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: java-junit/results/**/*.xml
+          output: java-junit/results/test-summary.md
+        if: always()
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-junit
+          path: java-junit/results/test-summary.md
+        if: always()
+
+  # This runs JavaScript tests using the Mocha test framework
+  javascript-mocha:
+    name: JavaScript / Mocha
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build and test
+        run: |
+          npm ci
+          npm run test
+        working-directory: javascript-mocha
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: javascript-mocha/results/**/*.xml
+          output: javascript-mocha/results/test-summary.md
+        if: always()
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: javascript-mocha
+          path: javascript-mocha/results/test-summary.md
+        if: always()
+
+  # This runs JavaScript tests using the Node-Tap test framework
+  javascript-tap:
+    name: JavaScript / Node-Tap
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build and test
+        run: |
+          npm ci
+          npm run test
+        working-directory: javascript-tap
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: javascript-tap/results/**/*.tap
+          output: javascript-tap/results/test-summary.md
+        if: always()
+      - name: Upload test summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: javascript-tap
+          path: javascript-tap/results/test-summary.md
+        if: always()

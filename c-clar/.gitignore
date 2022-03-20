@@ -1,0 +1,6 @@
+*.o
+example
+clar.suite
+.clarcache
+results/
+test
