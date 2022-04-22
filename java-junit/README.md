@@ -33,12 +33,5 @@ jobs:
         uses: test-summary/action@dist
         with:
           paths: results/**/*.xml
-          output: results/test-summary.md
-        if: always()
-      - name: Upload test summary
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-summary
-          path: results/test-summary.md
         if: always()
 ```
