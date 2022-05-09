@@ -23,7 +23,7 @@ jobs:
           ./test -rresults/tests.xml
         working-directory: c-clar
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v1
         with:
           paths: c-clar/results/**/*.xml
         if: always()
@@ -42,7 +42,7 @@ jobs:
           dotnet test --logger "junit;LogFilePath=results/tests.xml"
         working-directory: dotnet
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v1
         with:
           paths: dotnet/results/**/*.xml
         if: always()
@@ -60,7 +60,7 @@ jobs:
           ant
         working-directory: java-junit
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v1
         with:
           paths: java-junit/results/**/*.xml
         if: always()
@@ -79,7 +79,7 @@ jobs:
           npm run test
         working-directory: javascript-mocha
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v1
         with:
           paths: javascript-mocha/results/**/*.xml
         if: always()
