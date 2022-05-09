@@ -98,7 +98,7 @@ jobs:
           npm run test
         working-directory: javascript-tap
       - name: Create test summary
-        uses: test-summary/action@dist
+        uses: test-summary/action@v1
         with:
           paths: javascript-tap/results/**/*.tap
         if: always()
