@@ -49,7 +49,7 @@ jobs:
 
   # This runs Java tests using the JUnit test framework
   java-junit:
-    name: Java / JUint
+    name: Java / JUnit
     runs-on: ubuntu-latest
 
     steps:
