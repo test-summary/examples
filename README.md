@@ -7,6 +7,7 @@ Some example projects to show how to emit test output in various types of projec
 Examples:
 
 * [C with the Clar test framework](c-clar/)
+* [Go with the JUnit test framework](go-junit/)
 * [Java with the JUnit test framework](java-junit/)
 * [JavaScript with the mocha test framework](javascript-mocha/)
 * [JavaScript with the node-tap test framework](javascript-tap/)
