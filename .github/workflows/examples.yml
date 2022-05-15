@@ -1,5 +1,7 @@
 name: Examples
 
+#dummy
+
 on:
   push:
     branches: [ main ]
@@ -45,6 +47,31 @@ jobs:
         uses: test-summary/action@v1
         with:
           paths: dotnet/results/**/*.xml
+        if: always()
+
+  go-junit:
+    name: Go / JUnit
+    runs-on: ubuntu-latest
+    env:
+      EXAMPLE_PATH: "go-junit"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build the code
+        working-directory: ${{ env.EXAMPLE_PATH }}
+        run: |
+          go build .
+      - name: Run the tests
+        working-directory: ${{ env.EXAMPLE_PATH }}
+        run: |
+          export GOPATH="$HOME/go/"
+          export PATH=$PATH:$GOPATH/bin
+          go install github.com/jstemmer/go-junit-report@latest
+          go test -v ./... | go-junit-report -set-exit-code > report.xml
+      - name: Create test summary
+        uses: test-summary/action@dist
+        with:
+          paths: ${{ env.EXAMPLE_PATH }}/report.xml
         if: always()
 
   # This runs Java tests using the JUnit test framework
