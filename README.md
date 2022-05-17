@@ -11,5 +11,6 @@ Examples:
 * [JavaScript with the mocha test framework](javascript-mocha/)
 * [JavaScript with the node-tap test framework](javascript-tap/)
 * [.NET](dotnet/)
+* [Ruby with RSpec](ruby-rspec/)
 
 For more information about how to configure the test-summary action, visit the [test-summary action](https://github.com/test-summary/action) repository.
