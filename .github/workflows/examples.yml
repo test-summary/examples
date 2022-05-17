@@ -102,3 +102,26 @@ jobs:
         with:
           paths: javascript-tap/results/**/*.tap
         if: always()
+
+  # This runs Ruby tests using the RSpec test framework
+  ruby-rspec:
+    name: Ruby / RSpec
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+      - name: Run Tests
+        run: |
+          bundle install
+          bundle exec rspec --format RSpec::TAP::Formatters::Flat --out spec/results.tap
+        working-directory: ruby-rspec
+      - name: Test Summary
+        uses: test-summary/action@v1
+        with:
+          paths: "ruby-rspec/spec/results.tap"
+        if: always()
