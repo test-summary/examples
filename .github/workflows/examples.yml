@@ -102,3 +102,25 @@ jobs:
         with:
           paths: javascript-tap/results/**/*.tap
         if: always()
+
+  # This runs Python tests using the Pytest test framework
+  pytest-junit:
+    name: Python / pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install pytest
+      - name: Run test
+        run: pytest --junit-xml=results/pytest-junit.xml
+        working-directory: pytest-junit
+      - name: Create test summary
+        uses: test-summary/action@v1
+        with:
+          paths: pytest-junit/results/*.xml
+        if: always()
