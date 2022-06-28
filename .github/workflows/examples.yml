@@ -104,7 +104,7 @@ jobs:
         if: always()
 
   # This runs Python tests using the Pytest test framework
-  javascript-tap:
+  pytest-junit:
     name: Python / pytest
     runs-on: ubuntu-latest
 
