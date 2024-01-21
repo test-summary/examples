@@ -9,25 +9,6 @@ on:
 
 jobs:
 
-  # This runs C tests using the Clar test framework
-  c-clar:
-    name: C / Clar
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Build and test
-        run: |
-          make
-          ./test -rresults/tests.xml
-        working-directory: c-clar
-      - name: Create test summary
-        uses: test-summary/action@v1
-        with:
-          paths: c-clar/results/**/*.xml
-        if: always()
-
   # This runs .NET tests using the standard .NET test driver
   dotnet:
     name: .NET
@@ -45,60 +26,4 @@ jobs:
         uses: test-summary/action@v1
         with:
           paths: dotnet/results/**/*.xml
-        if: always()
-
-  # This runs Java tests using the JUnit test framework
-  java-junit:
-    name: Java / JUnit
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Build and test
-        run: |
-          ant
-        working-directory: java-junit
-      - name: Create test summary
-        uses: test-summary/action@v1
-        with:
-          paths: java-junit/results/**/*.xml
-        if: always()
-
-  # This runs JavaScript tests using the Mocha test framework
-  javascript-mocha:
-    name: JavaScript / Mocha
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Build and test
-        run: |
-          npm ci
-          npm run test
-        working-directory: javascript-mocha
-      - name: Create test summary
-        uses: test-summary/action@v1
-        with:
-          paths: javascript-mocha/results/**/*.xml
-        if: always()
-
-  # This runs JavaScript tests using the Node-Tap test framework
-  javascript-tap:
-    name: JavaScript / Node-Tap
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Build and test
-        run: |
-          npm ci
-          npm run test
-        working-directory: javascript-tap
-      - name: Create test summary
-        uses: test-summary/action@v1
-        with:
-          paths: javascript-tap/results/**/*.tap
         if: always()
